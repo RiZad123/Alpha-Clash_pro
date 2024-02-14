@@ -10,13 +10,66 @@
 // }
 
 
+function buttonPress(event){
+
+    const playerPressed = event.key
+    console.log( 'Player Pressed', event.key );
+
+    const currentAlphabetElement = document.getElementById('currentAlphabet');
+    const current_alphabet = currentAlphabetElement.innerText;
+    const expectedAlphabet = current_alphabet.toLocaleLowerCase();
+    console.log(playerPressed, expectedAlphabet);
+
+
+    if (playerPressed === expectedAlphabet) {
+        console.log('you get a point');
+
+                   // update a Score
+
+    //  step--1  get the current  Score
+       const currentScoreElement = document.getElementById('current-score');
+       const currentScoreText = currentScoreElement.innerText;
+       const currentScore = parseInt(currentScoreText)
+       console.log(currentScore);
+
+    // step--2   increase the score
+       const newScore = currentScore + 1 ;
+
+    //    step--3 show the new score on screen
+       currentScoreElement.innerText=newScore;
+
+        console.log('you have pressed correctly', expectedAlphabet);
+        removeBackgroundColorById(expectedAlphabet);
+        continueGame();
+
+    } else{
+        console.log('you missed. and lost a life');
+
+        const currentLifeElement = document.getElementById("current-life");
+        const currentLifeText = currentLifeElement.innerText;
+        const currentLife = parseInt(currentLifeText)
+        
+        const newLife = currentLife - 1;
+
+        currentLifeElement.innerText=newLife;
+    }
+}
+
+document.addEventListener('keyup' , buttonPress)
+
+
+
+ 
 function continueGame(){
       const alphabet = getARandomAlphabet();
-      console.log('Your rendom Alphabet', alphabet);
+    //   console.log('Your rendom Alphabet', alphabet);
 
       const currentAlphabetElement = document.getElementById('currentAlphabet');
       currentAlphabetElement.innerText = alphabet;
+
+      setBackgroundColorById(alphabet);
 }
+
 
 
 
